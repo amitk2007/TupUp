@@ -34,7 +34,7 @@ public class PlayerScript : MonoBehaviour
 
     void PlayerMovment()
     {
-        transform.Translate(Input.acceleration.y * Time.deltaTime * speed, 0, 0);
+        transform.Translate(Input.acceleration.x * Time.deltaTime * speed, 0, 0);
         this.transform.GetComponent<Rigidbody>().AddForce(0, Input.touchCount, 0);
     }
 
