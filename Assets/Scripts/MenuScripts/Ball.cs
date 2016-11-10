@@ -22,7 +22,7 @@ public class Ball : MonoBehaviour
                 this.transform.GetComponent<Rigidbody>().useGravity = true;
                 useGravity = true;
             }
-            this.transform.position = Input.touches[0].position;
+            this.transform.position = PositionToScreen(Input.touches[0].position);
         }
     }
 
@@ -43,5 +43,10 @@ public class Ball : MonoBehaviour
                 Application.Quit();
             }
         }
+    }
+
+    Vector3 PositionToScreen(Vector3 position)
+    {
+       return Camera.main.ScreenToWorldPoint(new Vector3(position.x, position.y, 10));
     }
 }
