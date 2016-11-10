@@ -3,13 +3,19 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
-
     public GameObject[] Buttons = new GameObject[3];
+    public GameObject[] harts = new GameObject[3];
+    public Material BlueMaterial;
+    public Material RedMaterial;
+
+    public static int life = 2;
+
+    #region must be static
     public static Material StaticBlueMaterial;
     public static Material StaticRedMaterial;
     public static GameObject[] StaticButtons = new GameObject[3];
-    public Material BlueMaterial;
-    public Material RedMaterial;
+    public static GameObject[] staticharts = new GameObject[3];
+    #endregion
 
     // Use this for initialization
     void Start()
@@ -50,5 +56,25 @@ public class GameManager : MonoBehaviour
         StaticBlueMaterial = BlueMaterial;
         StaticRedMaterial = RedMaterial;
         StaticButtons = Buttons;
+        staticharts = harts;
+    }
+
+    public static void GetLifeDown()
+    {
+        if (life!=0)
+        {
+            staticharts[life].gameObject.SetActive(false);
+            life--;
+        }
+        if (life==1)
+        {
+            EndGame();
+        }
+    }
+
+    public static void EndGame()
+    {
+        Application.LoadLevel("Menu");
+        print("end game");
     }
 }

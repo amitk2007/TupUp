@@ -22,16 +22,35 @@ public class PlayerScript : MonoBehaviour
     {
         if (collision.transform.tag == "Button" && animationIsPlayed == false)
         {
-            if (GameManager.GetMaterialColor(collision.gameObject) == "blue")
-            {
-                animationIsPlayed = true;
-                collision.transform.GetComponent<Animation>().Play();
-                LastButton = collision.gameObject;
-                GUIScoreScript.playerScore++;
-            }
+            HitButton(collision);
+        }
+        if (collision.transform.tag=="Wall")
+        {
+            HitWall(collision);
         }
     }
 
+    void HitWall(Collision collision)
+    {
+        Vector3 force = this.transform.position - collision.gameObject.transform.position;
+        this.transform.GetComponent<Rigidbody>().AddForce(-force);
+    }
+
+    void HitButton(Collision collision)
+    {
+        if (GameManager.GetMaterialColor(collision.gameObject) == "blue")
+        {
+            animationIsPlayed = true;
+            collision.transform.GetComponent<Animation>().Play();
+            LastButton = collision.gameObject;
+            GUIScoreScript.playerScore++;
+        }
+        else if (GameManager.GetMaterialColor(collision.gameObject) == "red")
+        {
+            GameManager.GetLifeDown();
+        }
+    }
+        
     void PlayerMovment()
     {
         transform.Translate(Input.acceleration.x * Time.deltaTime * speed, 0, 0);
@@ -55,4 +74,5 @@ public class PlayerScript : MonoBehaviour
             }
         }
     }
+
 }
