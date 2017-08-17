@@ -36,7 +36,7 @@ public class Ball : MonoBehaviour
             }
             else if (collision.gameObject == buttons[1])//How to play Button
             {
-                print("1");
+                Application.LoadLevel("HTP");
             }
             else if (collision.gameObject == buttons[2])//Exit Button
             {
