@@ -45,7 +45,7 @@ public class GameManager : MonoBehaviour
         // Makes sure that the random don't repeat more then 3 times
         #region
         int rand = Random.Range(0, 3);
-        while (holder[0] == rand || holder[1] <= 3)
+        while (holder[0] == rand || holder[1] == 3)
         {
             rand = Random.Range(0, 3);
         }
